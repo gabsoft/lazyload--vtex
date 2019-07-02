@@ -12,14 +12,14 @@ After import/call files on page, its initialize automatically.
 ```html
 <!-- Vitrine -->
 <div class="your-class has--lazyload">
-  <noscript>$product.GetImageTag(30)</noscript>
+	<noscript>$product.GetImageTag(2)</noscript>
 </div>
 ```
 
 ```html
 <!-- Placeholder -->
 <div class="your-class has--lazyload">
-  <noscript><vtex:contentPlaceHolder id="Main-Banner" /></noscript>
+	<noscript><vtex:contentPlaceHolder id="Main-Banner" /></noscript>
 </div>
 ```
 
@@ -30,8 +30,8 @@ After import/call files on page, its initialize automatically.
 You can use the following classes to custom style:
 
 ```css
-.lazy { /* Uses when element isn't visible */ }
-.loaded { /* Uses when element is loaded */ }
+.lazy{ /* Uses when element isn't visible */ }
+.loaded{ /* Uses when element is loaded */ }
 ```
 
 ## License

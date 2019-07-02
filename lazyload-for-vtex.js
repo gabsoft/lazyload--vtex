@@ -13,7 +13,6 @@
 		elem.removeEventListener('onload', onloadImg);
 	};
 	var execLazy = function(elems, elemsInd){
-		console.time('replace-noscript');
 		var elems = elems;
 		for(var z = 0; z<elemsInd; z++){
 			var _content = elems[z].querySelector('noscript').textContent;
@@ -30,7 +29,6 @@
 			elems[z].innerHTML = _content;
 			elems[z].classList.remove('has--lazyload');
 		}
-		console.timeEnd('replace-noscript');
 		if('IntersectionObserver' in window){
 			var elems = document.querySelectorAll(".lazy");
 			var observer = new IntersectionObserver(function(entries,observer){
@@ -79,12 +77,12 @@
 	}
 	execLazy(elems,elemsInd);
 	document.addEventListener('DOMNodeInserted', function(){
-		elems = document.querySelectorAll('.has--lazyload');
+		elems = document.querySelectorAll('.has--lazyload') || document.querySelectorAll(".lazy");
 		elemsInd = elems.length;
 		throttle(function(){ execLazy(elems,elemsInd); },1000);
 	}, true);
 	document.addEventListener('DOMAttrModified', function(){
-		elems = document.querySelectorAll('.has--lazyload');
+		elems = document.querySelectorAll('.has--lazyload') || document.querySelectorAll(".lazy");
 		elemsInd = elems.length;
 		throttle(function(){ execLazy(elems,elemsInd); },1000);
 	}, true);

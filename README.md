@@ -1,4 +1,4 @@
-# Lazyload for VTEX
+# LazyLoad for VTEX
 A lazyload for be use with VTEX websites.
 
 ## Instalation
@@ -27,7 +27,7 @@ After import/call files on page, its initialize automatically.
 <!-- Images -->
 <img data-src="IMAGE_URL" src="data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" class="lazy">
 ```
-You can use the following classes to custom style:
+You can use the following classes on image tag &#60;img&#62; to custom style:
 
 ```css
 .lazy{ /* Uses when element isn't visible */ }
@@ -35,4 +35,4 @@ You can use the following classes to custom style:
 ```
 
 ## License
-Lazyload for VTEX is open-sourced software licensed under [MIT license](https://opensource.org/licenses/MIT).
+LazyLoad for VTEX is open-sourced software licensed under [MIT license](https://opensource.org/licenses/MIT).

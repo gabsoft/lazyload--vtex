@@ -79,11 +79,11 @@
 	document.addEventListener('DOMNodeInserted', function(){
 		elems = document.querySelectorAll('.has--lazyload') || document.querySelectorAll(".lazy");
 		elemsInd = elems.length;
-		throttle(function(){ execLazy(elems,elemsInd); },1000);
+		throttle(function(){ execLazy(elems,elemsInd); },500);
 	}, true);
 	document.addEventListener('DOMAttrModified', function(){
 		elems = document.querySelectorAll('.has--lazyload') || document.querySelectorAll(".lazy");
 		elemsInd = elems.length;
-		throttle(function(){ execLazy(elems,elemsInd); },1000);
+		throttle(function(){ execLazy(elems,elemsInd); },500);
 	}, true);
 })();

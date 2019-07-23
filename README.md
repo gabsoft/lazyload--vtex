@@ -1,9 +1,9 @@
-# LazyLoad for VTEX
+# LazyLoad for VTEX non-reactJS
 A lazyload for be use with VTEX websites.
 
 ## Instalation
 ```html
-<script src="/arquivos/lazyload-for-vtex-min.js"></script>
+<script defer="defer" src="/arquivos/lazyload-for-vtex-min.js"></script>
 ```
 
 ## Usage
@@ -25,13 +25,13 @@ After import/call files on page, its initialize automatically.
 
 ```html
 <!-- Images -->
-<img data-src="IMAGE_URL" src="data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" class="lazy">
+<img data-src="IMAGE_URL" src="data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" class="lazy-loading">
 ```
-You can use the following classes on image tag &#60;img&#62; to custom style:
+You can use the following classes on image tag &#60;img&#62; and iframe tag &#60;iframe&#62; to custom style:
 
 ```css
-.lazy{ /* Uses when element isn't visible */ }
-.loaded{ /* Uses when element is loaded */ }
+.lazy-loading{ /* Uses when element is loading */ }
+.lazy-loaded{ /* Uses when element is loaded */ }
 ```
 
 ## License

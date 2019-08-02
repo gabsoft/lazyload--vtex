@@ -27,11 +27,31 @@ After import/call files on page, its initialize automatically.
 <!-- Images -->
 <img data-src="IMAGE_URL" src="data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" class="lazy-loading">
 ```
-You can use the following classes on image tag &#60;img&#62; and iframe tag &#60;iframe&#62; to custom style:
+
+```html
+<!-- Iframe -->
+<div class="your-class has--lazyload">
+	<noscript><iframe src="IFRAME_URL"></iframe></noscript>
+</div>
+
+or
+
+<iframe class="lazy-loading" data-src="IFRAME_URL" src="data:text/plain;charset=UTF-8,Carregando..."></iframe>
+```
+
+You can use the following classes on image tag &#60;img&#62; to custom style:
 
 ```css
-.lazy-loading{ /* Uses when element is loading */ }
-.lazy-loaded{ /* Uses when element is loaded */ }
+/* Css */
+[class*="lazy-"] {
+	transition: opacity .3s linear;
+}
+.lazy-loading {
+	opacity: .3;
+}
+.lazy-loaded {
+	opacity: 1;
+}
 ```
 
 ## License

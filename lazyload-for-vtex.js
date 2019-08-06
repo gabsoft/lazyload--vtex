@@ -9,7 +9,7 @@
 	var eventsPolyfill = ['scroll', 'resize', 'transitionend', 'animationend', 'webkitAnimationEnd'].concat(eventsObserver);
 	var windowHeight = (window.innerHeight || document.documentElement.clientHeight);
 	var windowWidth = (window.innerWidth || document.documentElement.clientWidth);
-	var execLoad = null;
+	var execLoad, mountLoad = null;
 	var onloadImg = function(elem) {
 		elem.classList.remove('lazy-loading');
 		elem.classList.add('lazy-loaded');
@@ -17,15 +17,15 @@
 	};
 	var throttle = function(callback, limit){
 		if(execLoad!==null)clearTimeout(execLoad);
-		execLoad = setTimeout(function(){
-			callback();
-		},550);
+		execLoad = setTimeout(function(){ callback() },(limit||550));
 	}
-	var elems = document.querySelectorAll('.has--lazyload');
-	if(!elems.length)return;
-	if(elems[0].classList.contains('has--lazyload')){
+	var mountLazy = function(){
+		var elems = document.querySelectorAll('.has--lazyload');
+		if(!elems.length || mountLoad!==null)return;
+		mountLoad = setTimeout(function(){ mountLoad = null },500);
 		for(var z = 0, y = elems.length; z<y; z++){
-			var _content = elems[z].querySelector('noscript').textContent;
+			var _content = elems[z].querySelector('noscript');
+			_content = _content.textContent;
 			if(regImg.test(_content)){
 				_content = _content.replace(regImg, function(str){
 					return str.replace(regSrc, repImg);
@@ -39,7 +39,7 @@
 			elems[z].innerHTML = _content;
 			elems[z].classList.remove('has--lazyload');
 		}
-	}
+	};
 	if('IntersectionObserver' in window){
 		var execLazy = function(){
 			var lazy = document.querySelectorAll('.lazy-loading');
@@ -56,7 +56,7 @@
 			}
 		}
 		for(var x = 0, c = eventsObserver.length; x<c; x++){
-			document.addEventListener(eventsObserver[x], function(){ throttle( function(){ execLazy() }); }, true);
+			document.addEventListener(eventsObserver[x], function(){ mountLazy(); throttle( function(){ execLazy() }); }, true);
 		}
 	}else{
 		var execLazy = function(){
@@ -65,16 +65,15 @@
 			for(var z = 0, v = lazy.length; z<v; z++){
 				if(lazy[z].classList.contains("lazy-loaded"))continue;
 				var rect = lazy[z].getBoundingClientRect();
-				var visible = (rect.top >= 0 && rect.left >= 0 && rect.top <= windowHeight && rect.right <= windowWidth);
-				if(visible){
+				if(rect.top >= 0 && rect.left >= 0 && rect.top <= windowHeight && rect.right <= windowWidth){
 					lazy[z].src = lazy[z].dataset.src;
 					lazy[z].onload = onloadImg(lazy[z]);
 				}
 			}
 		};
 		for(var x = 0, c = eventsPolyfill.length; x<c; x++){
-			document.addEventListener(eventsPolyfill[x], function(){ execLazy() }, true);
+			document.addEventListener(eventsPolyfill[x], function(){ mountLazy(); throttle(function(){ execLazy() },200) }, true);
 		}
-		document.addEventListener('mouseup', function(){ throttle(function(){ execLazy() }) }, true);
+		document.addEventListener('mouseup', function(){ mountLazy(); throttle(function(){ execLazy() }) }, true);
 	}
 })();
